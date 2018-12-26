@@ -1,4 +1,4 @@
-#pragma once // Р’РєР»СЋС‡РµРЅРёРµ РїСЂРѕРёСЃС…РѕРґРёС‚ С‚РѕР»СЊРєРѕ 1 СЂР°Р·. РЅРµ СЃС‚Р°РЅРґР°СЂС‚РЅР°СЏ РґРёСЂСЂРµРєС‚РёРІР°.РїСЂРµРґР»РѕР¶РёР» VS
+#pragma once // Включение происходит только 1 раз. не стандартная дирректива.предложил VS
 #include <iostream> 
 #include <SFML\Graphics.hpp>
 #include "Class.h"
@@ -6,24 +6,23 @@
 using namespace sf;
 
 //////////Enemy//////////
-Enemy:: Enemy(Image &image, float X, float Y, int W, int H, std::string Name) :Smth(image, X, Y, W, H, Name)
-         { if (name == "EasyEnemy")
-         { 
-         direction = rand() % (4); //РќР°РїСЂР°РІР»РµРЅРёРµ РґРІРёР¶РµРЅРёСЏ РІСЂР°РіР° Р·Р°РґР°С‘Рј СЃР»СѓС‡Р°Р№РЅС‹Рј РѕР±СЂР°Р·РѕРј //С‡РµСЂРµР· РіРµРЅРµСЂР°С‚РѕСЂ СЃР»СѓС‡Р°Р№РЅС‹С… С‡РёСЃРµР»
-         Speed = 0.1;//РґР°РµРј СЃРєРѕСЂРѕСЃС‚СЊ.СЌС‚РѕС‚ РѕР±СЉРµРєС‚ РІСЃРµРіРґР° РґРІРёРіР°РµС‚СЃСЏ 
-          dx = Speed; 
-          }
-           }
+Enemy::Enemy(Image &image, float X, float Y, int W, int H, std::string Name) :Smth(image, X, Y, W, H, Name)
+{
+	if (name == "EasyEnemy")
+	{
+		direction = rand() % (4); //Направление движения врага задаём случайным образом //через генератор случайных чисел
+		Speed = 0.1;//даем скорость.этот объект всегда двигается 
+		dx = Speed;
+	}
+}
 
 
-void Enemy::interactionWithMap(float Dx, float Dy)//С„-С†РёСЏ РїСЂРѕРІРµСЂРєРё СЃС‚РѕР»РєРЅРѕРІРµРЅРёР№ СЃ РєР°СЂС‚РѕР№
+void Enemy::interactionWithMap(float Dx, float Dy)//ф-ция проверки столкновений с картой
 {
 
 };
 
-void Enemy::update(float time) 
-{ 
-  
-}; 
+void Enemy::update(float time)
+{
 
-
+};

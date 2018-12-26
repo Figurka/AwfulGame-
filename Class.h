@@ -9,6 +9,7 @@ using namespace sf;
 class Smth
 {
 public:
+	int direction;
 	enum { left, right, up, down, stay} state;
 	float dx, dy, x, y, Speed, MoveTimer;
 	float CurrentFrame=0;
@@ -41,7 +42,6 @@ public:
 class Enemy: public Smth //
 {
 public:
-	int direction;
 	int num;
 	Enemy(Image &image, float X, float Y, int W, int H, std::string Name);
 	void interactionWithMap(float Dx, float Dy);//ф-ция проверки столкновений с картой
@@ -49,3 +49,10 @@ public:
 };
 
 //////////Bullet//////////
+class Bullet :public Smth
+{//класс пули
+public://направление пули 
+	Bullet(Image &image, float X, float Y, int W, int H, std::string Name, int dir);
+	void update(float time);
+	void interactionWithMap(float Dx, float Dy);
+};
