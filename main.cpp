@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "map.h"
 #include "Class.h"
 using namespace sf;
 
