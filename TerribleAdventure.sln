@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TerribleAdventure", "TerribleAdventure.vcxproj", "{7563A700-6EF2-415A-B96A-53470F42F75C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7563A700-6EF2-415A-B96A-53470F42F75C}.Debug|x64.ActiveCfg = Debug|x64
+		{7563A700-6EF2-415A-B96A-53470F42F75C}.Debug|x64.Build.0 = Debug|x64
+		{7563A700-6EF2-415A-B96A-53470F42F75C}.Debug|x86.ActiveCfg = Debug|Win32
+		{7563A700-6EF2-415A-B96A-53470F42F75C}.Debug|x86.Build.0 = Debug|Win32
+		{7563A700-6EF2-415A-B96A-53470F42F75C}.Release|x64.ActiveCfg = Release|x64
+		{7563A700-6EF2-415A-B96A-53470F42F75C}.Release|x64.Build.0 = Release|x64
+		{7563A700-6EF2-415A-B96A-53470F42F75C}.Release|x86.ActiveCfg = Release|Win32
+		{7563A700-6EF2-415A-B96A-53470F42F75C}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4AD64C1D-E91A-4C3D-802A-E7829B5E3933}
+	EndGlobalSection
+EndGlobal
