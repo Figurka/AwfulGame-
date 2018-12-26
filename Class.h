@@ -25,6 +25,17 @@ public:
 
 
 //////////Player//////////
+class Player: public Smth // класс Игрока
+{ 
+public:
+	int playerScore;
+	int dir = 0; //направление (direction) движения игрока
+	String File; //файл с расширением
+	Player(Image &image, float X, float Y, int W, int H, std::string Name);
+	void interactionWithMap(float Dx, float Dy);
+	void update(float time);
+	void control();
+};
 
 //////////Enemy//////////
 
