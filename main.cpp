@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream> 
 #include "map.h"
+#include "menu.h"
 #include "Class.h"
 #include <SFML/Audio.hpp>
 #include <list>
@@ -26,7 +27,9 @@ int main()
 
 	RenderWindow window(sf::VideoMode(1600, 928), "awful game", sf::Style::Resize);
 	window.setFramerateLimit(60);
+	while (true) {
 
+		if (menu(window)) break;
 
 	Image heroImage;
 	heroImage.loadFromFile("Image/sailor.png");
@@ -86,6 +89,7 @@ int main()
 				{
 					Bullets.push_back(new Bullet(heroImage, p.x, p.y, 16, 16, "Bullet1", p.state));
 					shoot.play();
+
 				}
 
 			}
@@ -188,7 +192,10 @@ int main()
 		for (it = enemies.begin(); it != enemies.end(); it++) {
 			if ((*it)->name == "EasyEnemy") {
 				(*it)->update(time); //запускаем метод update()
-				if (!((int)time % 20)) { Bullets.push_back(new Bullet(heroImage, ((*it)->x) + 5, (*it)->y, 16, 16, "Bullet", (*it)->direction)); }
+
+				int ran;
+				ran = rand() % (4);
+				if (!((int)time % 200)) { Bullets.push_back(new Bullet(heroImage, ((*it)->x) + 5, (*it)->y, 16, 16, "Bullet", (*it)->direction)); }
 			}
 		}
 
@@ -245,8 +252,9 @@ int main()
 		}
 
 
-
+		if (p.Life == false) { break; }
 		window.display();
+		}
 	}
 
 	return 0;

@@ -9,5 +9,6 @@
   <ItemGroup>
     <ClInclude Include="Class.h" />
     <ClInclude Include="map.h" />
+    <ClInclude Include="menu.h" />
   </ItemGroup>
 </Project>
