@@ -7,22 +7,23 @@ using namespace sf;
 
 
 
-//////////MainClass//////////
+//конструктор класса smth
 	Smth:: Smth(Image &image, float X, float Y, int W, int H, std::string Name)
 	{
-		x = X;
+		x = X;//Координаты x,y
 		y = Y;
-		w = W; h = H;
-		name = Name;
-		Speed = 0;
-		Health = 100; 
+		w = W;//ширина и высота
+		h = H;
+		name = Name;//имя файла
+		Speed = 0;//скорость
+		Health = 100; //здоровье
 		dx = 0; 
 		dy = 0;
-		Life = true;
+		Life = true;//жизни
 		texture.loadFromImage(image); //заносим наше изображение в текстуру 
 	 	sprite.setTexture(texture); //заливаем спрайт текстурой
 	};
-
+	//функция для проверки пересечения котоырая возвращает координаты
 	FloatRect Smth::getRect()
 	{ 
 		FloatRect  FR ( x, y, w, h);
@@ -31,8 +32,8 @@ using namespace sf;
 
 
 
-//////////Player//////////
-	Player:: Player(Image &image, float X, float Y, int W, int H, std::string Name) :Smth(image, X, Y, W, H, Name)  //Конструктор с параметрами(формальными) для класса Player. При создании объекта класса мы будем задавать имя файла, координату Х и У, ширину и высоту
+//конструктор класса Player
+	Player:: Player(Image &image, float X, float Y, int W, int H, std::string Name) :Smth(image, X, Y, W, H, Name)  
   { 
 		Player:: playerScore = 0;
 		 state = stay;
@@ -50,7 +51,7 @@ using namespace sf;
     //проходимся по элементам карты
       for (int j = x / 32; j<(x + w) / 32; j++) 
       {
-
+		  //если встречаем кота теряем очки, но получаем жизни
         if (TileMap[i][j] == '5'){
           TileMap[i][j] =' ';
 		  Health += 10;
@@ -60,29 +61,30 @@ using namespace sf;
 
          if (TileMap[i][j] == '1')//если элемент - тайлик земли 
          { 
-           if (Dy > 0) 
-           {
-             y = i * 32 - h; dy = -0.1; 
-                 //Направление движения врага 
-                    }//по Y
-                    if (Dy < 0) 
+
+				   if (Dy > 0) //проверка столкновения вниз
+				   {
+					 y = i * 32 - h; dy = -0.1; 
+                
+					}
+                    if (Dy < 0) //вверх
                     {
                      y = i * 32 + 32; 
                      dy = 0.1;
-                  //Направление движения врага 
-                      }//столкновение с верхними краями
-                      if (Dx > 0)
+               
+                      }
+                      if (Dx > 0)//вправо
                       { 
                         x = j * 32 - w;
 					  dx = -0.1;
-                       //Направление движения врага 
-                      }//с правым краем карты 
-                      if (Dx < 0) 
+                      
+                      }
+                      if (Dx < 0) //влево
                       {
                        x = j * 32 + 32; 
                        dx = 0.1; 
                         //Направление движения врага
-                      }// с левым краем карты 
+                      }
 				
                     } 
                }
@@ -119,7 +121,7 @@ using namespace sf;
 				  dx = Speed;
           dy =0;
            CurrentFrame += 0.005*time;
-				  if (CurrentFrame > 2) CurrentFrame -= 2;
+				  if (CurrentFrame > 2) CurrentFrame -= 2;//анимация
 				 sprite.setTextureRect(IntRect(21*int(CurrentFrame), 80, 20, 40));
 				  break;
 			  }

@@ -1,6 +1,6 @@
 #include <SFML/Graphics.hpp>
 #include "map.h"
-sf::String TileMap[HEIGHT_MAP] = {
+sf::String TileMap[HEIGHT_MAP] = {//массив для отрисовки элементов карты
 	"11111111111111111111111111111111111111111111112222",
 	"1                               1        1   12222",
 	"1                                            12222",
