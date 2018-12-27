@@ -3,6 +3,7 @@
 #include "map.h"
 #include "Class.h"
 #include "map.h"
+#include <list>
 using namespace sf;
 
 int main()
@@ -15,6 +16,14 @@ int main()
 		Sprite j_map;//??? ??? ?? ???
 		j_map.setTexture(mapp);
 
+
+
+		Image EnemImage;
+		EnemImage.loadFromFile("Image/sailorenemy.png");
+		EnemImage.createMaskFromColor(Color(255, 255, 255));
+
+	
+
 		while (window.isOpen())
 		{
 			sf::Event event;
@@ -23,6 +32,7 @@ int main()
 				if (event.type == sf::Event::Closed) { window.close(); }
 
 			}
+
 	/////////////////////////////Map////////////////////
 			for (int i = 0; i < HEIGHT_MAP; i++)
 				for (int j = 0; j < WIDTH_MAP; j++)
@@ -53,6 +63,8 @@ int main()
 					};
 					window.draw(j_map);
 				}
+
+				
 				window.display();
 			}
 
