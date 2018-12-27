@@ -30,6 +30,7 @@ int main()
 	Image EnemImage;
 	EnemImage.loadFromFile("Image/sailorenemy.png");
 	EnemImage.createMaskFromColor(Color(255, 255, 255));
+	Enemy enem(EnemImage, 250, 250, 20, 40, "EasyEnemy");
 
 	Image map_imagee;//?????????? ?? ???
 	map_imagee.loadFromFile("Image/juh.png");//??????? ?? ???
@@ -52,7 +53,6 @@ int main()
 
 
 
-
 	while (window.isOpen())
 	{
 		float time = clock.getElapsedTime().asMicroseconds();
@@ -64,6 +64,39 @@ int main()
 		time = time / 800;
 
 		sf::Event event;
+		p.update(time);
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed) { window.close(); }
+			if (event.type == sf::Event::KeyPressed) //shoot
+			{
+				if (event.key.code == sf::Keyboard::P)
+				{
+					Bullets.push_back(new Bullet(heroImage, p.x, p.y, 16, 16, "Bullet1", p.state));
+			
+				}
+
+			}
+
+		}
+
+
+		for (it = Bullets.begin(); it != Bullets.end(); it++)
+		{
+			(*it)->update(time); //запускаем метод update() 
+		}
+
+		//Проверяем список на наличие "мертвых" пуль и удаляем их 
+		for (it = Bullets.begin(); it != Bullets.end(); )//говорим что проходимся от начала до конца 
+		{// если этот объект мертв, то удаляем его 
+			if ((*it)->Life == false)
+			{
+				delete (*it);
+				it = Bullets.erase(it);
+			}
+			else { it++; }//и идем курсором (итератором) к след объекту. 
+		} //Проверка пересечения игрок
+
 
 		for (enemiescount; enemiescount < enemy; enemiescount++)
 		{
@@ -85,7 +118,70 @@ int main()
 			else it++;//и идем курсором (итератором) к след объекту. так делаем со всеми объектами списка
 		}
 
-		window.clear();
+
+		for (it2 = Bullets.begin(); it2 != Bullets.end(); it2++)
+		{//проходимся по эл-там списка
+
+			for (it = enemies.begin(); it != enemies.end(); it++)//проходимся по эл-там списка
+			{
+				if ((*it)->getRect() != (*it2)->getRect())//при этом это должны быть разные прямоугольники
+
+					if (((*it)->getRect().intersects((*it2)->getRect())) && ((*it)->name == "EasyEnemy") && ((*it2)->name == "Bullet1"))
+					{
+						(*it2)->Life = false;
+						(*it)->Health = 0;
+						p.playerScore += 20;
+						em += 1;
+					}
+
+			}
+		}
+		for (it = Bullets.begin(); it != Bullets.end(); it++)
+		{//проходимся по эл-там списка				
+			if ((*it)->getRect() != p.getRect())//при этом это должны быть разные прямоугольники
+				if ((*it)->getRect().intersects(p.getRect()) && ((*it)->name == "Bullet"))
+				{
+					(*it)->Life = false;
+					p.Health -= 10;
+				}
+
+
+		}
+
+
+
+
+
+
+
+		for (it = enemies.begin(); it != enemies.end(); it++)//проходимся по эл-там списка
+		{
+			if ((*it)->getRect().intersects(p.getRect()))//если прямоугольник спрайта объекта пересекается с игроком
+			{
+
+
+				if ((*it)->name == "EasyEnemy") {//и при этом имя объекта EasyEnemy,то..
+					(*it)->Life = false;
+					p.playerScore -= 10;
+					em += 1;
+
+				}
+
+			}
+		}
+
+
+
+
+		for (it = enemies.begin(); it != enemies.end(); it++) {
+			if ((*it)->name == "EasyEnemy") {
+				(*it)->update(time); //запускаем метод update()
+
+				int ran;
+				ran = rand() % (4);
+				if (!((int)time % 200)) { Bullets.push_back(new Bullet(heroImage, ((*it)->x) + 5, (*it)->y, 16, 16, "Bullet", (*it)->direction)); }
+			}
+		}
 
 		/////////////////////////////Map////////////////////
 		for (int i = 0; i < HEIGHT_MAP; i++)
@@ -123,11 +219,23 @@ int main()
 		p.update(time);
 		window.draw(p.sprite);
 		//отрисовка врагов
+		p.update(time);
+		window.draw(p.sprite);
+		//отрисовка врагов
 		for (it = enemies.begin(); it != enemies.end(); it++) {
 			window.draw((*it)->sprite); //рисуем enemies объекты
-
-
 		}
+
+		//Отрисовка пуль
+		for (it = Bullets.begin(); it != Bullets.end(); it++)
+		{
+			if ((*it)->Life); //если пули живы 
+			{
+				window.draw((*it)->sprite);
+			} //рисуем объекты 
+		}
+
+
 
 		window.display();
 	}
