@@ -176,10 +176,7 @@ int main()
 		for (it = enemies.begin(); it != enemies.end(); it++) {
 			if ((*it)->name == "EasyEnemy") {
 				(*it)->update(time); //запускаем метод update()
-
-				int ran;
-				ran = rand() % (4);
-				if (!((int)time % 200)) { Bullets.push_back(new Bullet(heroImage, ((*it)->x) + 5, (*it)->y, 16, 16, "Bullet", (*it)->direction)); }
+				if (!((int)time % 20)) { Bullets.push_back(new Bullet(heroImage, ((*it)->x) + 5, (*it)->y, 16, 16, "Bullet", (*it)->direction)); }
 			}
 		}
 
