@@ -10,7 +10,19 @@ using namespace sf;
 
 int main()
 {
+	Music music;//создаем объект музыки
+	music.openFromFile("Music/ap.flac");//загружаем файл
+	music.play();//воспроизводим музыку
+	music.setVolume(20);
 
+	SoundBuffer deathp;//создаём буфер для звука
+	deathp.loadFromFile("Music/sc.flac");//загружаем в него звук
+	Sound death(deathp);//создаем звук и загружаем в него звук из буфера
+	death.setVolume(20);
+
+	SoundBuffer shootp;//создаём буфер для звука
+	shootp.loadFromFile("Music/shoot1.flac");//загружаем в него звук
+	Sound shoot(shootp);//создаем звук и загружаем в него звук из буфера
 
 	RenderWindow window(sf::VideoMode(1600, 928), "awful game", sf::Style::Resize);
 	window.setFramerateLimit(60);
@@ -73,7 +85,7 @@ int main()
 				if (event.key.code == sf::Keyboard::P)
 				{
 					Bullets.push_back(new Bullet(heroImage, p.x, p.y, 16, 16, "Bullet1", p.state));
-			
+					shoot.play();
 				}
 
 			}
@@ -114,7 +126,7 @@ int main()
 		{
 			Smth *b = *it;//для удобства, чтобы не писать (*it)->
 			b->update(time);//вызываем ф-цию update для всех объектов (по сути для тех, кто жив)
-			if (b->Life == false) { it = enemies.erase(it); delete b; }// если этот объект мертв, то удаляем его
+			if (b->Life == false) { it = enemies.erase(it); delete b; death.play(); }// если этот объект мертв, то удаляем его
 			else it++;//и идем курсором (итератором) к след объекту. так делаем со всеми объектами списка
 		}
 
