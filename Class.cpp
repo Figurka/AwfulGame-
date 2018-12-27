@@ -14,7 +14,6 @@ using namespace sf;
 		y = Y;
 		w = W; h = H;
 		name = Name;
-		MoveTimer = 0;
 		Speed = 0;
 		Health = 100; 
 		dx = 0; 
@@ -75,7 +74,7 @@ using namespace sf;
                       if (Dx > 0)
                       { 
                         x = j * 32 - w;
-            dx = -0.1;
+					  dx = -0.1;
                        //Направление движения врага 
                       }//с правым краем карты 
                       if (Dx < 0) 
@@ -91,19 +90,19 @@ using namespace sf;
   ///////////////////////////////////////////Управление персонажем с анимацией////////////////////////////////////////////////////////////////////////
   void Player::control() {
 
-	  if (Keyboard::isKeyPressed(Keyboard::A))
+	  if (Keyboard::isKeyPressed(Keyboard::Left))
 	  {
 		  state = left; Speed = 0.1;
 	  }
-	  if (Keyboard::isKeyPressed(Keyboard::D))
+	  if (Keyboard::isKeyPressed(Keyboard::Right))
 	  {
 		  state = right; Speed = 0.1;
 	  }
-	  if (Keyboard::isKeyPressed(Keyboard::W))
+	  if (Keyboard::isKeyPressed(Keyboard::Up))
 	  {
 		  state = up; Speed = 0.1;
 	  }
-	  if (Keyboard::isKeyPressed(Keyboard::S))
+	  if (Keyboard::isKeyPressed(Keyboard::Down))
 	  {
 		  state = down; Speed = 0.1;
 	  }

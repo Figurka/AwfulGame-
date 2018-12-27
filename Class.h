@@ -11,10 +11,10 @@ class Smth
 public:
 	int direction;
 	enum { left, right, up, down, stay} state;
-	float dx, dy, x, y, Speed, MoveTimer;
+	float dx, dy, x, y, Speed;
 	float CurrentFrame=0;
 	int w, h, Health;
-	bool Life, isMove, onGround;
+	bool Life;
 	Texture texture;
 	Sprite sprite;
 	std::string name;

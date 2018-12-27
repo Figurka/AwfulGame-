@@ -30,6 +30,15 @@ int main()
 	Text text("", font, 20);//создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
 	text.setColor(Color::White);
 
+	Font font1;//шрифт 
+	font1.loadFromFile("nove.ttf");//передаем нашему шрифту файл шрифта
+	Text text1("", font, 50);//создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
+	text1.setColor(Color::Black);
+
+	Texture menuBackground;
+	menuBackground.loadFromFile("Image/sai.jpg");
+	Sprite  menuBg(menuBackground);
+
 	RenderWindow window(sf::VideoMode(1600, 928), "awful game", sf::Style::Resize);
 	window.setFramerateLimit(60);
 	while (true) {
@@ -90,7 +99,7 @@ int main()
 			if (event.type == sf::Event::Closed) { window.close(); }
 			if (event.type == sf::Event::KeyPressed) //shoot
 			{
-				if (event.key.code == sf::Keyboard::P)
+				if (event.key.code == sf::Keyboard::Z)
 				{
 					Bullets.push_back(new Bullet(heroImage, p.x, p.y, 16, 16, "Bullet1", p.state));
 					shoot.play();
@@ -116,9 +125,9 @@ int main()
 				it = Bullets.erase(it);
 			}
 			else { it++; }//и идем курсором (итератором) к след объекту. 
-		} //Проверка пересечения игрок
+		}
 
-
+		
 		for (enemiescount; enemiescount < enemy; enemiescount++)
 		{
 			float xr = 150 + rand() % 500; // случайная координата врага на поле игры по оси “x”
@@ -130,7 +139,7 @@ int main()
 		if (em >= enemy) { enemiescount = 0; em = 0; }
 
 
-
+		//удаление врагов из списка
 		for (it = enemies.begin(); it != enemies.end();)//говорим что проходимся от начала до конца
 		{
 			Smth *b = *it;//для удобства, чтобы не писать (*it)->
@@ -139,7 +148,7 @@ int main()
 			else it++;//и идем курсором (итератором) к след объекту. так делаем со всеми объектами списка
 		}
 
-
+		//проверка пересечения пули с врагом
 		for (it2 = Bullets.begin(); it2 != Bullets.end(); it2++)
 		{//проходимся по эл-там списка
 
@@ -157,6 +166,7 @@ int main()
 
 			}
 		}
+		//проверка пересечения игрока с пулей
 		for (it = Bullets.begin(); it != Bullets.end(); it++)
 		{//проходимся по эл-там списка				
 			if ((*it)->getRect() != p.getRect())//при этом это должны быть разные прямоугольники
@@ -169,19 +179,14 @@ int main()
 
 		}
 
-
-
-
-
-
-
+		//проверка пересечения врагов с игроком
 		for (it = enemies.begin(); it != enemies.end(); it++)//проходимся по эл-там списка
 		{
 			if ((*it)->getRect().intersects(p.getRect()))//если прямоугольник спрайта объекта пересекается с игроком
 			{
 
 
-				if ((*it)->name == "EasyEnemy") {//и при этом имя объекта EasyEnemy,то..
+				if ((*it)->name == "EasyEnemy") {
 					(*it)->Life = false;
 					p.playerScore -= 10;
 					em += 1;
@@ -191,9 +196,7 @@ int main()
 			}
 		}
 
-
-
-
+		//передвижение и стрельба врагов
 		for (it = enemies.begin(); it != enemies.end(); it++) {
 			if ((*it)->name == "EasyEnemy") {
 				(*it)->update(time); //запускаем метод update()
@@ -204,32 +207,32 @@ int main()
 			}
 		}
 
-		/////////////////////////////Map////////////////////
+	//отрисовка карты
 		for (int i = 0; i < HEIGHT_MAP; i++)
 			for (int j = 0; j < WIDTH_MAP; j++)
 			{
 				if (TileMap[i][j] == '1') {
-					j_map.setTextureRect(sf::IntRect(0, 0, 32, 32)); //?? ???????? ???, ? ??? 1??????
+					j_map.setTextureRect(sf::IntRect(0, 0, 32, 32)); 
 					j_map.setPosition(j * 32, i * 32);
-				};//? ?? ?????? ?????, ????? ???? ? ?? ??? ????? ?? ????. ?? ???, ? ?? ???????? ???????? 32*32 ?? ??? ?? ????
+				};
 				if (TileMap[i][j] == '0') {
-					j_map.setTextureRect(sf::IntRect(33, 0, 32, 32)); //?? ???????? ???, ? ??? 1??????
+					j_map.setTextureRect(sf::IntRect(33, 0, 32, 32)); 
 					j_map.setPosition(j * 32, i * 32);
 				};
 				if (TileMap[i][j] == ' ') {
-					j_map.setTextureRect(sf::IntRect(66, 0, 32, 32)); //?? ???????? ???, ? ??? 1??????
+					j_map.setTextureRect(sf::IntRect(66, 0, 32, 32));
 					j_map.setPosition(j * 32, i * 32);
 				};
 				if (TileMap[i][j] == '2') {
-					j_map.setTextureRect(sf::IntRect(99, 0, 32, 32)); //?? ???????? ???, ? ??? 1??????
+					j_map.setTextureRect(sf::IntRect(99, 0, 32, 32)); 
 					j_map.setPosition(j * 32, i * 32);
 				};
 				if (TileMap[i][j] == '4') {
-					j_map.setTextureRect(sf::IntRect(133, 0, 64, 64)); //?? ???????? ???, ? ??? 1??????
+					j_map.setTextureRect(sf::IntRect(133, 0, 64, 64)); 
 					j_map.setPosition(j * 32, i * 32);
 				};
 				if (TileMap[i][j] == '5') {
-					j_map.setTextureRect(sf::IntRect(0, 33, 32, 32)); //?? ???????? ???, ? ??? 1??????
+					j_map.setTextureRect(sf::IntRect(0, 33, 32, 32)); 
 					j_map.setPosition(j * 32, i * 32);
 				};
 				window.draw(j_map);
@@ -239,16 +242,14 @@ int main()
 			std::ostringstream gameTimeString, scoregame, healthplay;    // объявили переменную здоровья и времени
 			gameTimeString << gameTime; scoregame << p.playerScore;	healthplay << p.Health;	//формируем строку
 			text.setString("\nTime: " + gameTimeString.str() + "\nScore:" + scoregame.str() + "\nHealth:" + healthplay.str());//задаем строку тексту и вызываем сформированную выше строку методом .str()
-			text.setPosition(1500, 50);//задаем позицию текста, отступая от центра камеры
-			window.draw(text);//рисую этот текст
-
-
+			text.setPosition(100, 100);//задаем позицию текста, отступая от центра камеры
+			window.draw(text);
 
 		p.update(time);
 		window.draw(p.sprite);
-		//отрисовка врагов
 		p.update(time);
 		window.draw(p.sprite);
+
 		//отрисовка врагов
 		for (it = enemies.begin(); it != enemies.end(); it++) {
 			window.draw((*it)->sprite); //рисуем enemies объекты
@@ -264,7 +265,13 @@ int main()
 		}
 
 
-		if (p.Life == false) { break; }
+		if (p.Life == false) {
+			window.draw(menuBg);
+			text1.setString("\Your score:" + scoregame.str()+"\nPress enter to go into menu");
+			text1.setPosition(10, 450);//задаем позицию текста, отступая от центра камеры
+			window.draw(text1);
+			if (event.key.code == sf::Keyboard::Enter) { break; }
+		}
 		window.display();
 		}
 	}

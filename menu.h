@@ -19,6 +19,7 @@ bool menu(RenderWindow & window) {
 	menuBackground.loadFromFile("Image/sai.jpg");
 	Sprite menu1(menuTexture1), menu2(menuTexture2), about(aboutTexture), menuBg(menuBackground);
 
+	bool score = 1;
 	bool isMenu = 1;
 	int menuNum = 0;
 	menu1.setPosition(50, 450);
@@ -44,5 +45,7 @@ bool menu(RenderWindow & window) {
 		window.draw(menu2);
 		window.display();
 	}
+	
 	////////////////////////////////////////////////////
+
 }
