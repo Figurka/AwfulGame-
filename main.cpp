@@ -25,6 +25,11 @@ int main()
 	shootp.loadFromFile("Music/shoot1.flac");//загружаем в него звук
 	Sound shoot(shootp);//создаем звук и загружаем в него звук из буфера
 
+	Font font;//шрифт 
+	font.loadFromFile("nove.ttf");//передаем нашему шрифту файл шрифта
+	Text text("", font, 20);//создаем объект текст. закидываем в объект текст строку, шрифт, размер шрифта(в пикселях);//сам объект текст (не строка)
+	text.setColor(Color::White);
+
 	RenderWindow window(sf::VideoMode(1600, 928), "awful game", sf::Style::Resize);
 	window.setFramerateLimit(60);
 	while (true) {
@@ -195,7 +200,7 @@ int main()
 
 				int ran;
 				ran = rand() % (4);
-				if (!((int)time % 200)) { Bullets.push_back(new Bullet(heroImage, ((*it)->x) + 5, (*it)->y, 16, 16, "Bullet", (*it)->direction)); }
+				if (!((int)time % 20)) { Bullets.push_back(new Bullet(heroImage, ((*it)->x) + 5, (*it)->y, 16, 16, "Bullet", (*it)->direction)); }
 			}
 		}
 
@@ -229,6 +234,13 @@ int main()
 				};
 				window.draw(j_map);
 			}
+
+			//отрисовка времени
+			std::ostringstream gameTimeString, scoregame, healthplay;    // объявили переменную здоровья и времени
+			gameTimeString << gameTime; scoregame << p.playerScore;	healthplay << p.Health;	//формируем строку
+			text.setString("\nTime: " + gameTimeString.str() + "\nScore:" + scoregame.str() + "\nHealth:" + healthplay.str());//задаем строку тексту и вызываем сформированную выше строку методом .str()
+			text.setPosition(1500, 50);//задаем позицию текста, отступая от центра камеры
+			window.draw(text);//рисую этот текст
 
 
 
