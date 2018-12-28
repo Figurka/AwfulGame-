@@ -131,8 +131,8 @@ int main()
 			//раскидываем врагов рандомно по карте
 			for (enemiescount; enemiescount < enemy; enemiescount++)
 			{
-				float xr = 150 + rand() % 500; // случайная координата врага на поле игры по оси “x”
-				float yr = 150 + rand() % 350; // случайная координата врага на поле игры по оси “y”
+				float xr = 150 + rand() % 900; // случайная координата врага на поле игры по оси “x”
+				float yr = 150 + rand() % 500; // случайная координата врага на поле игры по оси “y”
 				enemies.push_back(new Enemy(EnemImage, xr, yr, 20, 32, "EasyEnemy"));	//увеличили счётчик врагов		
 			}
 
